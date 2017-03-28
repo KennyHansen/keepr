@@ -26,8 +26,8 @@ export default {
   },
   methods: {
       loginUser() {
-          if(this.username && this.email && this.password) {
-            this.$root.store.actions.login(this.username, this.email, this.password)
+          if(this.email && this.password) {
+            this.$root.store.actions.login(this.email, this.password)
             this.password = ''
             this.email = ''
             this.$router.push({path: '/'})

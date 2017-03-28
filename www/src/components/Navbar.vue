@@ -1,13 +1,14 @@
 <template>
-  <div class="Navbar black white-text">
-  <div v-if="loading">
-    <h2>Loading</h2>
+  <nav class="Navbar black white-text">
+  
+  <div v-if="loading == true">
+    <p>Loading</p>
   </div>
 
   <div v-else>
     <div v-if="user.name">
-        Welcome, {{user.name}}
-        <a @click="logout">Logout</a>
+        Welcome, {{user.name}}!
+        <a class="blue-text" href="#" @click="logout">Logout</a>
     </div>
     <ul v-else>
        <li><router-link to="login">Login</router-link></li>
@@ -17,7 +18,7 @@
 
 
 
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -28,7 +29,7 @@ export default {
   },
   computed: {
       loading() {
-          return this.$root.store.state.isLoading
+          return this.$root.store.state.loading
       },
       user() {
           return this.$root.store.state.user

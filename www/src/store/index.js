@@ -8,7 +8,7 @@ let api = axios.create({
 
 // REGISTER ALL DATA HERE
 let state = {
-    isLoading: false,
+    loading: false,
     user: {},
     myVaults: {},
     myKeeps: {},
@@ -101,14 +101,14 @@ export default {
             }).catch(handleError)
         },
         authenticate() {
-            state.loading = true
+            state.loading = false
             api('authenticate').then(res => {
                 if (res.data.data) {
                     state.user = res.data.data
                     state.loading = false
                 }
             }).catch(handleError)
-        },
+        }
     }
 
 }

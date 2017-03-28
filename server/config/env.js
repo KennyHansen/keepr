@@ -6,7 +6,7 @@ let env = {
 	DBUSERNAME: 'YoloSwaggins',
 	DBPASSWORD: 'swag',
 	DBHOST: 'ds060649.mlab.com:60649',
-	DBNAME: 'codeworks',
+	DBNAME: 'keepr',
 	SERVERNAME: 'dev-server'
 }
 
