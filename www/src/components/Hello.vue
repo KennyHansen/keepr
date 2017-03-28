@@ -3,8 +3,7 @@
     <h1>Welcome to Keepr</h1>
     <p>Get Started</p>
     <ul>
-      <li><router-link to="login">Login</router-link></li>
-      <li><router-link to="register">Register</router-link></li>
+      
     </ul>
     <hr>
   </div>
