@@ -29,10 +29,10 @@ export default {
   },
   computed: {
       loading() {
-          return this.$root.store.state.loading
+          return this.$root.$data.store.state.loading
       },
       user() {
-          return this.$root.store.state.user
+          return this.$root.$data.store.state.user
       }
   }, 
   methods: {

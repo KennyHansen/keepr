@@ -1,4 +1,6 @@
 import axios from 'axios'
+// import {keep} from './keep'
+// import {vault} from './vault'
 
 let api = axios.create({
     baseURL: 'http://localhost:3000/api/',
@@ -108,7 +110,57 @@ export default {
                     state.loading = false
                 }
             }).catch(handleError)
-        }
+        },
+        getKeeps() {
+            // only returns public keeps
+            api('keeps/public').then(res => {
+                console.log(res.data)
+                state.keeps = res.data.data
+            }).catch(handleError)
+        },
+        getMyKeeps() {
+            // only returns your keeps
+            api('users/' + userId + '/keeps').then(res => {
+                console.log(res.data)
+                state.myKeeps = res.data.data
+            }).catch(handleError)
+        },
+        getVaults(userId) {
+            // only returns user's vaults
+            api('users/' + userId + '/vaults').then(res => {
+                console.log(res.data)
+                state.myVaults = res.data.data
+            }).catch(handleError)
+        },
+        createKeep(title, author, imageUrl, articleLink, public, tags) {
+            console.log("alrighty then")
+            let keep = {
+                title, 
+                author, 
+                imageUrl,
+                articleLink, 
+                public, 
+                tags
+            }
+            api.post('/keeps', keep).then(res => {
+                console.log(res.data)
+            }).catch(handleError)
+        },
+        createVault(name, description, imageUrl) {
+            let vault = {
+                name,
+                description,
+                imageUrl
+            }
+            api.post('/vaults', vault).then(res => {
+                console.log(res.data)
+            }).catch(handleError)
+        },
+        addKeepToVault(keep, vault) {
+            api.put('/vaults/' + vault._id + '/keeps', keep._id).then(res => {
+                console.log(res.data)
+            })
+        },
     }
 
 }
