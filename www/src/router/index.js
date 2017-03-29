@@ -4,7 +4,9 @@ import Hello from '@/components/Hello'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Keeps from '@/components/Keeps'
-import Vaults from '@/components/Vaults'
+import Dashboard from '@/components/Dashboard'
+import ActiveVault from '@/components/ActiveVault'
+
 
 Vue.use(Router)
 
@@ -31,14 +33,14 @@ export default new Router({
       component: Keeps
     },
     {
-      path: '/vaults',
-      name: 'vaults',
-      component: Vaults
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard
     },
     {
       path: '/vaults/:id',
-      name: 'vault',
-      component: Vault
+      name: 'Active vault',
+      component: ActiveVault
     }
   ]
 })

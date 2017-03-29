@@ -3,8 +3,8 @@
     <h1>Welcome to Keepr</h1>
     <p>Get Started</p>
     <ul>
+      <router-link to="/dashboard"><li>Go to dashboard</li></router-link>
       <router-link to="/keeps"><li>Browse Keeps</li></router-link>
-      <router-link to="/vault"><li>Access the Vault</li></router-link>
     </ul>
     <hr>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div v-for="keep in keeps" :keep="keep">
-        <keep></keep>
+    <div v-for="keep in keeps">
+        <keep :keep="keep"></keep>
     </div>
     <form @submit.prevent="createKeep">
     
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
       createKeep() {
-        this.$root.$data.store.actions.createKeep(this.title, this.author, this.imageUrl, this.articleLink, this.public, this.tags)
+        this.$root.$data.store.actions.createKeep(this.title, this.author, this.imageUrl, this.articleLink, this.isPublic, this.tags)
       }
   }
 }

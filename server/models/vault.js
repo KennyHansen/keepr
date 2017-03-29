@@ -1,3 +1,5 @@
+import { models } from '../config/constants'
+
 let mongoose = require('mongoose')
 let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
@@ -9,7 +11,7 @@ let schema = new Schema({
   description: { type: String },
   imageUrl: { type: String },
   // Relations
-  userId: { type: ObjectId, ref: models.user.name, required: true },
+  creatorId: { type: ObjectId, ref: models.user.name },
   keeps: [{ type: ObjectId, ref: models.keep.name }]
 })
 

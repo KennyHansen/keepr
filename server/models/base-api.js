@@ -4,6 +4,12 @@ export default API
 
 function API(model, schema) {
   if (model.preventDefaultApi) { return {} }
+  if (model.postAndRemoveOnly) {
+    return {
+      post: create,
+      delete: remove
+    }
+  }
   return {
     get: get,
     post: create,

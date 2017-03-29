@@ -19,7 +19,9 @@ const models = {
   },
   keep: {
     name: "Keep",
-    endpoint: "keeps"
+    endpoint: "keeps",
+    postAndRemoveOnly: true,
+    useCustomRoutes: true
   }
 }
 

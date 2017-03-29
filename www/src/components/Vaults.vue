@@ -2,11 +2,9 @@
   <div class="vault">
     My Vaults
 
-    <vault v-for="vault in myVaults" :vault="vault"></vault>
+    <!-- <vault v-for="vault in myVaults" :vault="vault"></vault> -->
 
-    <form @submit.prevent="createVault">
     
-    </form>
   </div>
 </template>
 

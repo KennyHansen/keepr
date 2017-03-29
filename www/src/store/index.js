@@ -14,6 +14,7 @@ let state = {
     user: {},
     myVaults: {},
     myKeeps: {},
+    activeVault: {},
     //Dummy Data
     keeps: [{
         title: 'Learn to Draw',
@@ -78,17 +79,17 @@ export default {
     // ACTIONS ARE RESPONSIBLE FOR MANAGING ALL ASYNC REQUESTS
     actions: {
         login(email, password) {
-            state.isLoading = true
+            state.loading = true
             api.post('login', {
                 email: email,
                 password: password
             }).then(res => {
                 state.user = res.data.data
-                state.isLoading = false
+                state.loading = false
             }).catch(handleError)
         },
         register(username, email, password) {
-            state.isLoading = true
+            state.loading = true
             api.post('register', {
                 name: username,
                 email: email,
@@ -112,37 +113,55 @@ export default {
             }).catch(handleError)
         },
         getKeeps() {
-            // only returns public keeps
+            // CUSTOM: only returns public keeps
             api('keeps/public').then(res => {
                 console.log(res.data)
                 state.keeps = res.data.data
             }).catch(handleError)
         },
-        getMyKeeps() {
-            // only returns your keeps
-            api('users/' + userId + '/keeps').then(res => {
+        getKeepsInVault(vaultId) {
+            // return keeps in activeVault
+            api('vaults/' + vaultId + '/keeps').then(res => {
                 console.log(res.data)
-                state.myKeeps = res.data.data
+                state.activeVault.keeps = res.data.data
             }).catch(handleError)
         },
-        getVaults(userId) {
-            // only returns user's vaults
-            api('users/' + userId + '/vaults').then(res => {
+        getDashboard() {
+            // returns your keeps and vaults
+            api('dashboard').then(res => {
                 console.log(res.data)
-                state.myVaults = res.data.data
+                state.myKeeps = res.data.data.keeps
+                state.myVaults = res.data.data.vaults
             }).catch(handleError)
         },
-        createKeep(title, author, imageUrl, articleLink, public, tags) {
+        createKeep(title, author, imageUrl, articleLink, isPublic, tags) {
             console.log("alrighty then")
             let keep = {
-                title, 
-                author, 
+                title,
+                author,
                 imageUrl,
-                articleLink, 
-                public, 
+                articleLink,
+                isPublic,
                 tags
             }
             api.post('/keeps', keep).then(res => {
+                console.log(res.data)
+            }).catch(handleError)
+        },
+        // only in dashboard
+        removeKeep(keepId) {
+            api.delete('/keeps/' + keepId).then(res => {
+                console.log(res.data)
+            }).catch(handleError)
+        },
+        // Extra
+        makePublic(keepId) {
+            api.put('/keeps/' + keepId + '/public').then(res => {
+                console.log(res.data)
+            }).catch(handleError)
+        },
+        makePrivate(keepId) {
+            api.put('/keeps/' + keepId + '/private').then(res => {
                 console.log(res.data)
             }).catch(handleError)
         },
@@ -156,12 +175,21 @@ export default {
                 console.log(res.data)
             }).catch(handleError)
         },
+        removeVault(vaultId) {
+            api.delete('/vaults/' + vaultId).then(res => {
+                console.log(res.data)
+            }).catch(handleError)
+        },
         addKeepToVault(keep, vault) {
-            api.put('/vaults/' + vault._id + '/keeps', keep._id).then(res => {
+            api.put('/vaults/' + vault._id + '/addKeep', keep._id).then(res => {
                 console.log(res.data)
             })
         },
+        removeKeepFromVault(keep, vault) {
+            api.delete('/vaults/' + vault._id + '/removeKeep', keep._id).then(res => {
+                console.log(res.data)
+            })
+        }
     }
-
 }
 

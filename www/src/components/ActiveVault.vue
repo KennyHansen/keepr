@@ -1,7 +1,8 @@
 <template>
   <div class="vault">
-    {{vault}}
-    <router-link :to="{ path: '/vaults/' + vault._id }">Link to vault</router-link>
+    <div v-for="keep in vaultKeeps">
+        <keep :keep="keep"></keep>
+    </div>
   </div>
 </template>
 
@@ -14,8 +15,13 @@ export default {
 
     }
   },
+  mounted() {
+      this.$root.$data.store.actions.getKeepsInVault(this.vault._id)
+  },
   computed: {
-    
+      vaultKeeps() {
+          return this.$root.$data.store.state.activeVault.keeps || []
+      }
   }
 }
 </script>
