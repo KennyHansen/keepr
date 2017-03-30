@@ -7,7 +7,7 @@ export default {
         reqType: 'get',
         method(req, res, next) {
             let action = 'Return a list of public keeps'
-            Keeps.find({ public: true })
+            Keeps.find({ isPublic: true })
                 .then(keeps => {
                     res.send(handleResponse(action, keeps))
                 }).catch(error => {

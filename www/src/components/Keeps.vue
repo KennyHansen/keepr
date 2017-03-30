@@ -1,7 +1,21 @@
 <template>
   <div class="container">
+
+    <router-link to="/">Back</router-link>
+
     <div v-for="keep in keeps">
-        <keep :keep="keep"></keep>
+        <div class="card">
+            <div class="card-head grey lighten-4">
+                <p v-show="keep.author">{{keep.author}}</p>
+            </div>
+            <div class="card-body">
+                <p v-show="keep.body">{{keep.body}}</p>
+            </div>
+            <div class="card-title">
+                <p v-show="keep.title">{{keep.title}}</p>
+                <img :src="keep.imgUrl"></img>
+            </div>
+        </div>
     </div>
     <form @submit.prevent="createKeep">
     
@@ -10,19 +24,19 @@
 </template>
 
 <script>
-import Keep from './Keep'
 export default {
   name: 'keeps',
-  components: { Keep },
   data () {
     return {
         title: '',
-        author: this.user.name || '',
         imageUrl: '',
         articleLink: '',
-        public: false,
-        tags: ''
+        public: true,
+        tags: '',
     }
+  },
+  mounted() {
+      this.$root.$data.store.actions.getKeeps()
   },
   computed: {
       keeps() {

@@ -1,9 +1,12 @@
 <template>
   <div class="dashboard">
 
+    <router-link to="/">Back</router-link>
+
     <h2>My Vaults</h2>
     <div v-for="vault in myVaults">
       {{vault.name}}
+      <router-link :to="{ path: '/vaults/' + vault._id }">Link to vault</router-link>
     </div>
 
     <form @submit.prevent="createVault">
@@ -23,10 +26,8 @@
 </template>
 
 <script>
-import Vault from './Vault'
 export default {
   name: 'Dashboard',
-  components: { Vault },
   data () {
     return {
         name: '',
