@@ -122,6 +122,7 @@ export default {
         },
         getKeepsInVault(vaultId) {
             // return keeps in activeVault
+            console.log(vaultId)
             api('vaults/' + vaultId + '/keeps').then(res => {
                 console.log(res.data)
                 state.activeVault.keeps = res.data.data

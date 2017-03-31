@@ -2,11 +2,18 @@
   <div class="container">
 
     <router-link to="/">Back</router-link>
+    <!-- 
+    
+        Display vaults on side with link to them, click & drag keeps to vaults to add them, 
+        then toast a message to the user. 
+    
+    -->
 
     <div v-for="keep in keeps">
         <div class="card">
             <div class="card-head grey lighten-4">
                 <p v-show="keep.author">{{keep.author}}</p>
+                <button @click="addToVault">Add To Vault</button>
             </div>
             <div class="card-body">
                 <p v-show="keep.body">{{keep.body}}</p>
@@ -31,7 +38,7 @@ export default {
         title: '',
         imageUrl: '',
         articleLink: '',
-        public: true,
+        isPublic: true,
         tags: '',
     }
   },
@@ -42,6 +49,9 @@ export default {
       keeps() {
           return this.$root.$data.store.state.keeps
       },
+      vaults() {
+          return this.$root.$data.store.state.myVaults
+      },
       user() {
           return this.$root.$data.store.state.user
       }
@@ -49,6 +59,11 @@ export default {
   methods: {
       createKeep() {
         this.$root.$data.store.actions.createKeep(this.title, this.author, this.imageUrl, this.articleLink, this.isPublic, this.tags)
+      },
+      addToVault() {
+          console.log('ok')
+          // pick which vault to add it to
+
       }
   }
 }

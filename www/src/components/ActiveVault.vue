@@ -1,7 +1,12 @@
 <template>
   <div class="vault">
+    <!-- 
+    
+        Each keep should have a button to remove them from the vault
+    
+    -->
     <div v-for="keep in vaultKeeps">
-        <keep :keep="keep"></keep>
+        {{keep}}
     </div>
   </div>
 </template>
@@ -9,14 +14,13 @@
 <script>
 export default {
   name: 'vault',
-  props: ['vault'],
   data () {
     return {
 
     }
   },
   mounted() {
-      this.$root.$data.store.actions.getKeepsInVault(this.vault._id)
+      this.$root.$data.store.actions.getKeepsInVault(this.$route.params.id)
   },
   computed: {
       vaultKeeps() {
